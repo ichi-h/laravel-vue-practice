@@ -1,12 +1,14 @@
 <template>
-  <section>
-    <p>todos: {{ todos }}</p>
-    <p>order: {{ order }}</p>
-  </section>
+  <main class="main">
+    <h1 class="main__title">Todo list</h1>
+    <TodoList :todos="todos" :order="order"></TodoList>
+  </main>
 </template>
 
 <script>
 import { fetchTodosList, fetchOrder } from "./api";
+
+import TodoList from "./components/TodoList/TodoList.vue";
 
 export default {
   data: () => {
@@ -14,6 +16,9 @@ export default {
       todos: [],
       order: []
     }
+  },
+  components: {
+    TodoList
   },
   mounted: function () {
     fetchTodosList()
