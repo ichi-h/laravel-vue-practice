@@ -1,9 +1,7 @@
 <template>
-  <section class="todo">
-    <section v-for="todo in orderedTodos">
-      <TodoListItem :todo="todo"></TodoListItem>
-    </section>
-  </section>
+  <ul class="todo-list">
+    <TodoListItem v-for="todo in orderedTodos" :todo="todo" :key="todo.id" />
+  </ul>
 </template>
 
 <script>
@@ -33,4 +31,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.todo-list {
+  padding-left: 0;
+}
 </style>
