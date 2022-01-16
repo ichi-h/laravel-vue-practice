@@ -1,15 +1,23 @@
 <template>
   <li class="todo-item">
-    <input class="todo-item__is-done" type="checkbox" :checked="todo.isDone" />
+    <Checkbox :id="`check_${todo.id}`" :checked="todo.isDone" :onClick="toggleIsDone" />
     <input class="todo-item__task" type="text" :value="todo.task" :disabled="todo.isDone" />
     <button class="todo-item__remove">[x]</button>
   </li>
 </template>
 
 <script>
+import Checkbox from "../forms/Checkbox.vue";
+
 export default {
   props: {
     todo: Object
+  },
+  components: { Checkbox },
+  methods: {
+    toggleIsDone: function (e) {
+      this.todo.isDone = e.currentTarget.checked;
+    }
   }
 }
 </script>
@@ -47,7 +55,7 @@ export default {
     }
 
     &:disabled {
-      border: none;
+      border-color: rgba($color: $text-color, $alpha: 0);
       text-decoration: line-through;
     }
   }
