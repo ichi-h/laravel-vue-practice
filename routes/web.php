@@ -14,3 +14,8 @@
 Route::get('/', function () {
     return view('index');
 });
+
+// APIs
+
+Route::post('/todos/get', 'TodosController@get');
+Route::post('/orders/get', 'OrdersController@get');

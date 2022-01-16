@@ -7,9 +7,8 @@ use Illuminate\Http\Request;
 
 class TodosController extends Controller
 {
-    public function index()
+    public function get()
     {
-        $todos = Todo::all();
-        return view('todos.index')->with('todos', $todos);
+        return response()->json(Todo::all());
     }
 }
