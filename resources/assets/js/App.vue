@@ -13,8 +13,12 @@ import TodoList from "./components/TodoList/TodoList.vue";
 export default {
   data: () => {
     return {
-      todos: [],
-      order: []
+      todos: {
+        value: []
+      },
+      order: {
+        value: []
+      }
     }
   },
   components: {
@@ -23,7 +27,7 @@ export default {
   mounted: function () {
     fetchTodosList()
       .then((todos) => {
-        this.todos = todos
+        this.todos.value = todos
           .map((todo) => {
             if (todo.isDone === 0) {
               return { ...todo, isDone: false };
@@ -33,7 +37,7 @@ export default {
       });
     fetchOrder()
       .then((order) => {
-        this.order = order[0]["todo_order"].split(",");
+        this.order.value = order[0]["todo_order"].split(",");
       });
   }
 };

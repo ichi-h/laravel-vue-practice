@@ -1,8 +1,14 @@
 <template>
   <li class="todo-item">
     <Checkbox :id="`check_${todo.id}`" :checked="todo.isDone" :onClick="toggleIsDone" />
-    <input class="todo-item__task" type="text" :value="todo.task" :disabled="todo.isDone" />
-    <button class="todo-item__remove">[x]</button>
+    <input
+      class="todo-item__task"
+      type="text"
+      :value="todo.task"
+      @blur="onTaskBlur"
+      :disabled="todo.isDone"
+    />
+    <button class="todo-item__remove" @click="onRemove">[x]</button>
   </li>
 </template>
 
@@ -11,12 +17,19 @@ import Checkbox from "../forms/Checkbox.vue";
 
 export default {
   props: {
-    todo: Object
+    todo: Object,
+    onRemove: Function
   },
   components: { Checkbox },
   methods: {
     toggleIsDone: function (e) {
       this.todo.isDone = e.currentTarget.checked;
+    },
+    onTaskBlur: function (e) {
+      this.todo.task = e.currentTarget.value;
+    },
+    onDeleteClick: function () {
+      this.onRemove();
     }
   }
 }
