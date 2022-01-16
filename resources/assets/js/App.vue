@@ -22,7 +22,15 @@ export default {
   },
   mounted: function () {
     fetchTodosList()
-      .then((json) => this.todos = json);
+      .then((todos) => {
+        this.todos = todos
+          .map((todo) => {
+            if (todo.isDone === 0) {
+              return { ...todo, isDone: false };
+            }
+            return { ...todo, isDone: true }
+          });
+      });
     fetchOrder()
       .then((order) => {
         this.order = order[0]["todo_order"].split(",");
