@@ -25,3 +25,13 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.main {
+  width: 60%;
+  margin: 0 auto;
+}
+.main__title {
+  border-bottom: 1px solid;
+}
+</style>
