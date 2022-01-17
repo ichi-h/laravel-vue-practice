@@ -10,6 +10,7 @@
 </template>
 
 <script>
+import { deleteTodo, setOrder } from "../../api";
 import TodoListItem from "./TodoListItem.vue";
 
 export default {
@@ -26,6 +27,8 @@ export default {
             .filter((todo) => todo.id !== target);
           this.order.value = this.order.value
             .filter((id) => id !== target);
+          deleteTodo(target);
+          setOrder(this.order.value.join());
         }
       }
     }
