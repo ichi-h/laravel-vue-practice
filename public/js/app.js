@@ -45968,8 +45968,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       handler: function handler() {
         var newOrder = this.todos.value.map(function (todo) {
           return todo.id;
-        }).join();
-        Object(__WEBPACK_IMPORTED_MODULE_0__api__["e" /* setOrder */])(newOrder);
+        });
+        this.order.value = newOrder;
+        Object(__WEBPACK_IMPORTED_MODULE_0__api__["e" /* setOrder */])(newOrder.join());
       },
       deep: true
     }

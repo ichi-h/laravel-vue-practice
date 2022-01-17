@@ -32,9 +32,9 @@ export default {
     todos: {
       handler: function () {
         const newOrder = this.todos.value
-          .map((todo) => todo.id)
-          .join();
-        setOrder(newOrder);
+          .map((todo) => todo.id);
+        this.order.value = newOrder;
+        setOrder(newOrder.join());
       },
       deep: true
     }
