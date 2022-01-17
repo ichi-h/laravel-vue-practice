@@ -1,5 +1,12 @@
 <template>
-  <input class="input-text" type="text" :value="value" @blur="onTaskBlur" :disabled="disabled" />
+  <input
+    class="input-text"
+    type="text"
+    :value="value"
+    @change="onChange"
+    :placeholder="placeholder"
+    :disabled="disabled"
+  />
 </template>
 
 <script>
@@ -7,7 +14,8 @@ export default {
   props: {
     value: String,
     disabled: Boolean,
-    onTaskBlur: Function
+    onChange: Function,
+    placeholder: String,
   }
 }
 </script>
@@ -18,6 +26,8 @@ export default {
 .input-text {
   border: 0;
   outline: 0;
+  width: 50rem;
+  max-width: 90vw;
   background: none;
   transition: 0.1s;
   padding-left: 1rem;
