@@ -2,13 +2,14 @@
   <li class="todo-item">
     <Checkbox :id="`check_${todo.id}`" :checked="todo.isDone" :onClick="toggleIsDone" />
     <InputText type="text" :value="todo.task" :onTaskBlur="onTaskBlur" :disabled="todo.isDone" />
-    <button class="todo-item__remove" @click="onRemove">[x]</button>
+    <TextButton value="x" :onClick="onDeleteClick" />
   </li>
 </template>
 
 <script>
 import Checkbox from "../forms/Checkbox.vue";
 import InputText from "../forms/InputText.vue"
+import TextButton from "../forms/TextButton.vue";
 
 export default {
   props: {
@@ -17,7 +18,8 @@ export default {
   },
   components: {
     Checkbox,
-    InputText
+    InputText,
+    TextButton
   },
   methods: {
     toggleIsDone: function (e) {
@@ -39,16 +41,5 @@ export default {
 .todo-item {
   list-style: none;
   padding: 0;
-
-  &__is-done {
-    background: none;
-  }
-
-  &__remove {
-    border: 0;
-    outline: 0;
-    background: none;
-    transition: 0.1s;
-  }
 }
 </style>
