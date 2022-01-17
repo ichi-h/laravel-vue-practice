@@ -1,24 +1,28 @@
 <template>
-  <ul class="todo-list">
+  <Draggable tag="ul" :list="todos.value" class="todo-list" handle=".handle">
     <TodoListItem
-      v-for="todo in orderedTodos"
+      v-for="todo in todos.value"
       :todo="todo"
       :onRemove="onRemove(todo.id)"
       :key="todo.id"
     />
-  </ul>
+  </Draggable>
 </template>
 
 <script>
 import { deleteTodo, setOrder } from "../../api";
 import TodoListItem from "./TodoListItem.vue";
+import Draggable from "vuedraggable";
 
 export default {
   props: {
     todos: Object,
     order: Object,
   },
-  components: { TodoListItem },
+  components: {
+    Draggable,
+    TodoListItem
+  },
   methods: {
     onRemove: function (target) {
       return () => {
@@ -32,21 +36,7 @@ export default {
         }
       }
     }
-  },
-  computed: {
-    orderedTodos: function () {
-      return (
-        this.order.value
-          .map((id) => {
-            for (let todo of this.todos.value) {
-              if (`${todo.id}` === `${id}`) return todo;
-            }
-            return null;
-          })
-          .filter((todo) => todo !== null)
-      );
-    }
-  },
+  }
 }
 </script>
 

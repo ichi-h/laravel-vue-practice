@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { getTodosList, getOrder } from "./api";
+import { getTodosList, getOrder, setOrder } from "./api";
 import { intToBool } from "./utils/intToBool";
 
 import AddTodoForm from "./components/forms/AddTodoForm.vue";
@@ -29,15 +29,34 @@ export default {
     AddTodoForm,
     TodoList
   },
+  watch: {
+    todos: {
+      handler: function () {
+        const newOrder = this.todos.value
+          .map((todo) => todo.id)
+          .join();
+        setOrder(newOrder);
+      },
+      deep: true
+    }
+  },
   mounted: function () {
-    getTodosList()
-      .then((todos) => {
-        this.todos.value = todos
-          .map((todo) => ({ ...todo, isDone: intToBool(todo.isDone) }));
-      });
     getOrder()
       .then((order) => {
         this.order.value = order["todo_order"].split(",");
+      })
+      .then(() => getTodosList())
+      .then((todos) => {
+        this.todos.value = todos
+          .map((todo) => ({ ...todo, isDone: intToBool(todo.isDone) }));
+        this.todos.value = this.order.value
+          .map((id) => {
+            for (let todo of this.todos.value) {
+              if (`${todo.id}` === `${id}`) return todo;
+            }
+            return null;
+          })
+          .filter((todo) => todo !== null);
       });
   }
 };
