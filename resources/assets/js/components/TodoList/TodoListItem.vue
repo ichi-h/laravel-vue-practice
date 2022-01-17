@@ -7,7 +7,7 @@
     </div>
     <Checkbox :id="`check_${todo.id}`" :checked="todo.is_done" :onClick="toggleis_done" />
     <InputText type="text" :value="todo.task" :onChange="onTaskChange" :disabled="todo.is_done" />
-    <TextButton value="x" :onClick="onDeleteClick" />
+    <TextButton value="x" type="button" :onClick="onDeleteClick" />
   </li>
 </template>
 

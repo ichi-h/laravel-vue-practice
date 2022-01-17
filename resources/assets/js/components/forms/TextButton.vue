@@ -1,12 +1,13 @@
 <template>
-  <button class="text-btn" @click="onClick">[{{ value }}]</button>
+  <button class="text-btn" @click="onClick" :type="type">[{{ value }}]</button>
 </template>
 
 <script>
 export default {
   props: {
     onClick: Function,
-    value: String
+    value: String,
+    type: String
   }
 }
 </script>

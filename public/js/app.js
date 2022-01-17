@@ -47117,7 +47117,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     onClick: Function,
-    value: String
+    value: String,
+    type: String
   }
 });
 
@@ -47129,9 +47130,15 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("button", { staticClass: "text-btn", on: { click: _vm.onClick } }, [
-    _vm._v("[" + _vm._s(_vm.value) + "]")
-  ])
+  return _c(
+    "button",
+    {
+      staticClass: "text-btn",
+      attrs: { type: _vm.type },
+      on: { click: _vm.onClick }
+    },
+    [_vm._v("[" + _vm._s(_vm.value) + "]")]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -47171,7 +47178,7 @@ var render = function() {
         }
       }),
       _vm._v(" "),
-      _c("TextButton", { attrs: { value: "add", onClick: _vm.add } })
+      _c("TextButton", { attrs: { value: "add", type: "submit" } })
     ],
     1
   )
@@ -47664,7 +47671,9 @@ var render = function() {
         }
       }),
       _vm._v(" "),
-      _c("TextButton", { attrs: { value: "x", onClick: _vm.onDeleteClick } })
+      _c("TextButton", {
+        attrs: { value: "x", type: "button", onClick: _vm.onDeleteClick }
+      })
     ],
     1
   )
