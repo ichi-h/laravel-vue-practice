@@ -12,10 +12,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../../../sass/variables";
+
 .text-btn {
   border: 0;
   outline: 0;
   background: none;
   transition: 0.1s;
+
+  &:hover {
+    color: $brand-primary;
+  }
 }
 </style>

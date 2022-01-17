@@ -39,7 +39,7 @@ export default {
   }
 
   &:focus {
-    border-color: rgba($color: $text-color, $alpha: 1);
+    border-color: $brand-primary;
   }
 
   &:disabled {

@@ -2,7 +2,6 @@
   <main class="main">
     <h1 class="main__title">Todo list</h1>
     <AddTodoForm :todos="todos" :order="order" />
-    <hr />
     <TodoList :todos="todos" :order="order" />
   </main>
 </template>
@@ -64,10 +63,11 @@ export default {
 
 <style lang="scss" scoped>
 .main {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 5rem;
   width: 60%;
   margin: 0 auto;
-}
-.main__title {
-  border-bottom: 1px solid;
 }
 </style>

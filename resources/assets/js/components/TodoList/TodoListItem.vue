@@ -52,7 +52,7 @@ export default {
   padding: 0;
 
   & ~ & {
-    margin-top: 1rem;
+    margin-top: 3rem;
   }
 }
 
