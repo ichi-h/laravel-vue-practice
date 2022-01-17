@@ -1,13 +1,17 @@
 <template>
   <main class="main">
     <h1 class="main__title">Todo list</h1>
-    <TodoList :todos="todos" :order="order"></TodoList>
+    <AddTodoForm :todos="todos" :order="order" />
+    <hr />
+    <TodoList :todos="todos" :order="order" />
   </main>
 </template>
 
 <script>
-import { fetchTodosList, fetchOrder } from "./api";
+import { getTodosList, getOrder } from "./api";
+import { intToBool } from "./utils/intToBool";
 
+import AddTodoForm from "./components/forms/AddTodoForm.vue";
 import TodoList from "./components/TodoList/TodoList.vue";
 
 export default {
@@ -22,18 +26,14 @@ export default {
     }
   },
   components: {
+    AddTodoForm,
     TodoList
   },
   mounted: function () {
-    fetchTodosList()
+    getTodosList()
       .then((todos) => {
         this.todos.value = todos
-          .map((todo) => {
-            if (todo.isDone === 0) {
-              return { ...todo, isDone: false };
-            }
-            return { ...todo, isDone: true }
-          });
+          .map((todo) => ({ ...todo, isDone: intToBool(todo.isDone) }));
       });
     getOrder()
       .then((order) => {
