@@ -35,7 +35,7 @@ export default {
             return { ...todo, isDone: true }
           });
       });
-    fetchOrder()
+    getOrder()
       .then((order) => {
         this.order.value = order["todo_order"].split(",");
       });

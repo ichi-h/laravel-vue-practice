@@ -11,4 +11,12 @@ class OrdersController extends Controller
     {
         return response()->json(Order::find(1));
     }
+
+    public function set(Request $request)
+    {
+        $order = Order::find(1);
+        $order->todo_order = $request->todo_order;
+        $order->save();
+        return response()->json($order);
+    }
 }
