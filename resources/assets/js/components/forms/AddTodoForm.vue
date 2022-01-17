@@ -45,7 +45,6 @@ export default {
     },
     onChange: function (e) {
       this.task = e.currentTarget.value;
-      console.log(this.task);
     }
   }
 }
