@@ -1,5 +1,10 @@
 <template>
   <li class="todo-item">
+    <div class="handle">
+      <div class="handle__border"></div>
+      <div class="handle__border"></div>
+      <div class="handle__border"></div>
+    </div>
     <Checkbox :id="`check_${todo.id}`" :checked="todo.isDone" :onClick="toggleIsDone" />
     <InputText type="text" :value="todo.task" :onChange="onTaskChange" :disabled="todo.isDone" />
     <TextButton value="x" :onClick="onDeleteClick" />
@@ -45,5 +50,28 @@ export default {
 .todo-item {
   list-style: none;
   padding: 0;
+
+  & ~ & {
+    margin-top: 1rem;
+  }
+}
+
+.handle {
+  $size: 20px;
+
+  display: inline-block;
+  width: $size;
+  height: $size;
+  margin-right: 1rem;
+  vertical-align: middle;
+  cursor: move;
+
+  &__border {
+    border-top: 1px solid $text-color;
+
+    & ~ & {
+      margin-top: $size / 3;
+    }
+  }
 }
 </style>
