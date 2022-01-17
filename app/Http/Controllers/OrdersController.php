@@ -9,6 +9,6 @@ class OrdersController extends Controller
 {
     public function get()
     {
-        return response()->json(Order::all());
+        return response()->json(Order::find(1));
     }
 }
