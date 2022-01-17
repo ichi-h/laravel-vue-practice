@@ -26,6 +26,7 @@ export default {
   methods: {
     toggleIsDone: function (e) {
       this.todo.isDone = e.currentTarget.checked;
+      updateTodo(this.todo);
     },
     onTaskChange: function (e) {
       this.todo.task = e.currentTarget.value;
