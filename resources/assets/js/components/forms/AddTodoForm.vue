@@ -1,8 +1,8 @@
 <template>
-  <section class="add-form">
+  <form @submit.prevent="add" class="add-form">
     <InputText :value="task" :onChange="onChange" placeholder="Input task..." />
     <TextButton value="add" :onClick="add" />
-  </section>
+  </form>
 </template>
 
 <script>

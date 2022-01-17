@@ -47152,8 +47152,16 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "section",
-    { staticClass: "add-form" },
+    "form",
+    {
+      staticClass: "add-form",
+      on: {
+        submit: function($event) {
+          $event.preventDefault()
+          return _vm.add.apply(null, arguments)
+        }
+      }
+    },
     [
       _c("InputText", {
         attrs: {
