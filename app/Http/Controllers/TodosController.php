@@ -16,7 +16,7 @@ class TodosController extends Controller
     {
         $todo = new Todo();
         $todo->task = $request->task;
-        $todo->isDone = false;
+        $todo->is_done = false;
         $todo->save();
         return response()->json($todo);
     }
@@ -25,7 +25,7 @@ class TodosController extends Controller
     {
         $todo = Todo::find($id);
         $todo->task = $request->task;
-        $todo->isDone = $request->isDone;
+        $todo->is_done = $request->is_done;
         $todo->save();
         return response()->json($todo);
     }

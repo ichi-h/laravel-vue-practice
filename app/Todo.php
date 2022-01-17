@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Todo extends Model
 {
-    protected $fillable = ['task', 'isDone'];
+    protected $fillable = ['task', 'is_done'];
 
     public function order()
     {

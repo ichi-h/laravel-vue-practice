@@ -35,7 +35,7 @@ export const updateTodo = async (todo) =>
     },
     body: JSON.stringify({
       task: todo.task,
-      isDone: todo.isDone
+      is_done: todo.is_done
     }),
   }).then(async (res) => {
     return res.json();

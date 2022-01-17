@@ -36,7 +36,7 @@ export default {
       addTodo(this.task)
         .then((res) => {
           this.todos.value = this.todos.value
-            .concat({ ...res, isDone: intToBool(res.isDone) });
+            .concat({ ...res, is_done: intToBool(res.is_done) });
           this.order.value = this.order.value
             .concat(`${res.id}`);
           setOrder(this.order.value.join())

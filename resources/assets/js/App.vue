@@ -47,7 +47,7 @@ export default {
       .then(() => getTodosList())
       .then((todos) => {
         this.todos.value = todos
-          .map((todo) => ({ ...todo, isDone: intToBool(todo.isDone) }));
+          .map((todo) => ({ ...todo, is_done: intToBool(todo.is_done) }));
         this.todos.value = this.order.value
           .map((id) => {
             for (let todo of this.todos.value) {
