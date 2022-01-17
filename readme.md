@@ -1,7 +1,7 @@
 # laravel-vue-practice
 
 A simple application to manage a todo list in Lravel + Vue.js + MySQL.  
-To build development environment, I used laradoc.
+To build development environment, I used laradock.
 
 ![demo](imgs/demo.gif)
 
