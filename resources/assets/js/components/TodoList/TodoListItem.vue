@@ -5,7 +5,7 @@
       <div class="handle__border"></div>
       <div class="handle__border"></div>
     </div>
-    <Checkbox :id="`check_${todo.id}`" :checked="todo.is_done" :onClick="toggleis_done" />
+    <Checkbox :id="`check_${todo.id}`" :checked="todo.is_done" :onClick="toggleIsDone" />
     <InputText type="text" :value="todo.task" :onChange="onTaskChange" :disabled="todo.is_done" />
     <TextButton value="x" type="button" :onClick="onDeleteClick" />
   </li>
@@ -29,7 +29,7 @@ export default {
     TextButton
   },
   methods: {
-    toggleis_done: function (e) {
+    toggleIsDone: function (e) {
       this.todo.is_done = e.currentTarget.checked;
       updateTodo(this.todo);
     },
