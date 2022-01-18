@@ -45881,7 +45881,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n.main[data-v-66ab2f82] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  gap: 5rem;\n  width: 60%;\n  margin: 0 auto;\n}\n", ""]);
+exports.push([module.i, "\n.main[data-v-66ab2f82] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  gap: 5rem;\n  width: 60%;\n  margin: 0 auto;\n}\n.main__isNotDone[data-v-66ab2f82] {\n    font-size: 2rem;\n}\n", ""]);
 
 // exports
 
@@ -45927,10 +45927,12 @@ module.exports = function listToStyles (parentId, list) {
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__api__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_intToBool__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_forms_AddTodoForm_vue__ = __webpack_require__(55);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_forms_AddTodoForm_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_forms_AddTodoForm_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_TodoList_TodoList_vue__ = __webpack_require__(68);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_TodoList_TodoList_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_TodoList_TodoList_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_forms_TextButton_vue__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_forms_TextButton_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_forms_TextButton_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_forms_AddTodoForm_vue__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_forms_AddTodoForm_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_forms_AddTodoForm_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_TodoList_TodoList_vue__ = __webpack_require__(68);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_TodoList_TodoList_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_TodoList_TodoList_vue__);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 //
@@ -45941,6 +45943,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+//
+
 
 
 
@@ -45960,8 +45967,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     };
   },
   components: {
-    AddTodoForm: __WEBPACK_IMPORTED_MODULE_2__components_forms_AddTodoForm_vue___default.a,
-    TodoList: __WEBPACK_IMPORTED_MODULE_3__components_TodoList_TodoList_vue___default.a
+    TextButton: __WEBPACK_IMPORTED_MODULE_2__components_forms_TextButton_vue___default.a,
+    AddTodoForm: __WEBPACK_IMPORTED_MODULE_3__components_forms_AddTodoForm_vue___default.a,
+    TodoList: __WEBPACK_IMPORTED_MODULE_4__components_TodoList_TodoList_vue___default.a
   },
   watch: {
     todos: {
@@ -45973,6 +45981,30 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         Object(__WEBPACK_IMPORTED_MODULE_0__api__["e" /* setOrder */])(newOrder.join());
       },
       deep: true
+    }
+  },
+  computed: {
+    remaining: function remaining() {
+      return this.todos.value.filter(function (todo) {
+        return !todo.is_done;
+      }).length;
+    }
+  },
+  methods: {
+    purge: function purge() {
+      if (confirm("Are you sure?")) {
+        this.todos.value = this.todos.value.filter(function (todo) {
+          return !todo.is_done;
+        });
+        this.order.value = this.todos.value.map(function (todo) {
+          return todo.id;
+        });
+
+        this.todos.value.forEach(function (todo) {
+          Object(__WEBPACK_IMPORTED_MODULE_0__api__["f" /* updateTodo */])(todo);
+        });
+        Object(__WEBPACK_IMPORTED_MODULE_0__api__["e" /* setOrder */])(this.order.value.join());
+      }
     }
   },
   mounted: function mounted() {
@@ -47475,7 +47507,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     TextButton: __WEBPACK_IMPORTED_MODULE_3__forms_TextButton_vue___default.a
   },
   methods: {
-    toggleis_done: function toggleis_done(e) {
+    toggleIsDone: function toggleIsDone(e) {
       this.todo.is_done = e.currentTarget.checked;
       Object(__WEBPACK_IMPORTED_MODULE_0__api__["f" /* updateTodo */])(this.todo);
     },
@@ -47658,7 +47690,7 @@ var render = function() {
         attrs: {
           id: "check_" + _vm.todo.id,
           checked: _vm.todo.is_done,
-          onClick: _vm.toggleis_done
+          onClick: _vm.toggleIsDone
         }
       }),
       _vm._v(" "),
@@ -53921,9 +53953,24 @@ var render = function() {
     "main",
     { staticClass: "main" },
     [
-      _c("h1", { staticClass: "main__title" }, [_vm._v("Todo list")]),
+      _c("h1", { staticClass: "main__title" }, [
+        _vm._v("\n    Todo list\n    "),
+        _c("span", { staticClass: "main__isNotDone" }, [
+          _vm._v(
+            "(" +
+              _vm._s(_vm.remaining) +
+              " / " +
+              _vm._s(_vm.todos.value.length) +
+              ")"
+          )
+        ])
+      ]),
       _vm._v(" "),
       _c("AddTodoForm", { attrs: { todos: _vm.todos, order: _vm.order } }),
+      _vm._v(" "),
+      _c("TextButton", {
+        attrs: { value: "purge", type: "button", onClick: _vm.purge }
+      }),
       _vm._v(" "),
       _c("TodoList", { attrs: { todos: _vm.todos, order: _vm.order } })
     ],
