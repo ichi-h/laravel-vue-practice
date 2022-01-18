@@ -1,6 +1,9 @@
 <template>
   <main class="main">
-    <h1 class="main__title">Todo list</h1>
+    <h1 class="main__title">
+      Todo list
+      <span class="main__isNotDone">({{ remaining }} / {{ todos.value.length }})</span>
+    </h1>
     <AddTodoForm :todos="todos" :order="order" />
     <TodoList :todos="todos" :order="order" />
   </main>
