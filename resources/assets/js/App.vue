@@ -5,14 +5,16 @@
       <span class="main__isNotDone">({{ remaining }} / {{ todos.value.length }})</span>
     </h1>
     <AddTodoForm :todos="todos" :order="order" />
+    <TextButton value="purge" type="button" :onClick="purge" />
     <TodoList :todos="todos" :order="order" />
   </main>
 </template>
 
 <script>
-import { getTodosList, getOrder, setOrder } from "./api";
+import { getTodosList, getOrder, setOrder, updateTodo } from "./api";
 import { intToBool } from "./utils/intToBool";
 
+import TextButton from "./components/forms/TextButton.vue";
 import AddTodoForm from "./components/forms/AddTodoForm.vue";
 import TodoList from "./components/TodoList/TodoList.vue";
 
@@ -28,6 +30,7 @@ export default {
     }
   },
   components: {
+    TextButton,
     AddTodoForm,
     TodoList
   },
@@ -40,6 +43,28 @@ export default {
         setOrder(newOrder.join());
       },
       deep: true
+    }
+  },
+  computed: {
+    remaining: function () {
+      return this.todos.value
+        .filter((todo) => !todo.is_done)
+        .length
+    }
+  },
+  methods: {
+    purge: function () {
+      if (confirm("Are you sure?")) {
+        this.todos.value = this.todos.value
+          .filter((todo) => !todo.is_done);
+        this.order.value = this.todos.value
+          .map((todo) => todo.id);
+
+        this.todos.value.forEach((todo) => {
+          updateTodo(todo);
+        });
+        setOrder(this.order.value.join());
+      }
     }
   },
   mounted: function () {
@@ -72,5 +97,9 @@ export default {
   gap: 5rem;
   width: 60%;
   margin: 0 auto;
+
+  &__isNotDone {
+    font-size: 2rem;
+  }
 }
 </style>
