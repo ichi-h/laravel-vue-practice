@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { getTodosList, getOrder, setOrder, updateTodo } from "./api";
+import { getTodosList, deleteTodo, getOrder, setOrder } from "./api";
 import { intToBool } from "./utils/intToBool";
 
 import TextButton from "./components/forms/TextButton.vue";
@@ -54,15 +54,17 @@ export default {
   },
   methods: {
     purge: function () {
-      if (confirm("Are you sure?")) {
-        this.todos.value = this.todos.value
+      if (confirm("Removes all completed tasks. Are you sure?")) {
+        const done = this.todos.value
+          .filter((todo) => todo.is_done);
+        const notDone = this.todos.value
           .filter((todo) => !todo.is_done);
+
+        this.todos.value = notDone;
         this.order.value = this.todos.value
           .map((todo) => todo.id);
 
-        this.todos.value.forEach((todo) => {
-          updateTodo(todo);
-        });
+        done.forEach((todo) => deleteTodo(todo.id));
         setOrder(this.order.value.join());
       }
     }

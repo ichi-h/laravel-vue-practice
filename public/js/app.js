@@ -45977,16 +45977,21 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
   },
   methods: {
     purge: function purge() {
-      if (confirm("Are you sure?")) {
-        this.todos.value = this.todos.value.filter(function (todo) {
+      if (confirm("Removes all completed tasks. Are you sure?")) {
+        var done = this.todos.value.filter(function (todo) {
+          return todo.is_done;
+        });
+        var notDone = this.todos.value.filter(function (todo) {
           return !todo.is_done;
         });
+
+        this.todos.value = notDone;
         this.order.value = this.todos.value.map(function (todo) {
           return todo.id;
         });
 
-        this.todos.value.forEach(function (todo) {
-          Object(__WEBPACK_IMPORTED_MODULE_0__api__["f" /* updateTodo */])(todo);
+        done.forEach(function (todo) {
+          return Object(__WEBPACK_IMPORTED_MODULE_0__api__["b" /* deleteTodo */])(todo.id);
         });
         Object(__WEBPACK_IMPORTED_MODULE_0__api__["e" /* setOrder */])(this.order.value.join());
       }
