@@ -1,20 +1,13 @@
 import { CSRF_TOKEN } from "../utils/csrf";
 
 export const getTodosList = async () =>
-  fetch("./todos/get", {
-    method: "post",
-    headers: {
-      "content-type": "application/json",
-      "X-CSRF-TOKEN": CSRF_TOKEN,
-    },
-    body: null,
-  }).then(async (res) => {
+  fetch("./todos/get").then(async (res) => {
     return res.json();
   });
 
 export const addTodo = async (task) =>
   fetch("./todos/add", {
-    method: "post",
+    method: "POST",
     headers: {
       "content-type": "application/json",
       "X-CSRF-TOKEN": CSRF_TOKEN,
@@ -28,7 +21,7 @@ export const addTodo = async (task) =>
 
 export const updateTodo = async (todo) =>
   fetch(`./todos/update/${todo.id}`, {
-    method: "post",
+    method: "PATCH",
     headers: {
       "content-type": "application/json",
       "X-CSRF-TOKEN": CSRF_TOKEN,
@@ -43,31 +36,23 @@ export const updateTodo = async (todo) =>
 
 export const deleteTodo = async (id) =>
   fetch(`./todos/delete/${id}`, {
-    method: "post",
+    method: "DELETE",
     headers: {
       "content-type": "application/json",
       "X-CSRF-TOKEN": CSRF_TOKEN,
     },
-    body: null,
   }).then(async (res) => {
     return res.json();
   });
 
 export const getOrder = async () =>
-  fetch("./orders/get", {
-    method: "post",
-    headers: {
-      "content-type": "application/json",
-      "X-CSRF-TOKEN": CSRF_TOKEN,
-    },
-    body: null,
-  }).then(async (res) => {
+  fetch("./orders/get").then(async (res) => {
     return res.json();
   });
 
 export const setOrder = async (order) =>
   fetch("./orders/set", {
-    method: "post",
+    method: "PATCH",
     headers: {
       "content-type": "application/json",
       "X-CSRF-TOKEN": CSRF_TOKEN,

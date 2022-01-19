@@ -17,10 +17,10 @@ Route::get('/', function () {
 
 // APIs
 
-Route::post('/todos/get', 'TodosController@get');
+Route::get('/todos/get', 'TodosController@get');
 Route::post('/todos/add', 'TodosController@add');
-Route::post('/todos/update/{id}', 'TodosController@update');
-Route::post('/todos/delete/{id}', 'TodosController@delete');
+Route::patch('/todos/update/{id}', 'TodosController@update');
+Route::delete('/todos/delete/{id}', 'TodosController@delete');
 
-Route::post('/orders/get', 'OrdersController@get');
-Route::post('/orders/set', 'OrdersController@set');
+Route::get('/orders/get', 'OrdersController@get');
+Route::patch('/orders/set', 'OrdersController@set');
