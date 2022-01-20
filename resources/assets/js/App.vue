@@ -72,10 +72,19 @@ export default {
   mounted: function () {
     getOrder()
       .then((order) => {
-        this.order.value = order["todo_order"].split(",");
+        if (order["todo_order"] === null) {
+          this.order.value = [""];
+        } else {
+          this.order.value = order["todo_order"].split(",");
+        }
       })
       .then(() => getTodosList())
       .then((todos) => {
+        if (!todos.length) {
+          this.todos.value = [];
+          return;
+        }
+
         this.todos.value = todos
           .map((todo) => ({ ...todo, is_done: intToBool(todo.is_done) }));
         this.todos.value = this.order.value
