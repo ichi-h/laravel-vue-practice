@@ -45920,6 +45920,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_TodoList_TodoList_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_TodoList_TodoList_vue__);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -46001,42 +46003,27 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     var _this = this;
 
     Object(__WEBPACK_IMPORTED_MODULE_0__api__["c" /* getOrder */])().then(function (order) {
-      _this.order.value = order["todo_order"].split(",");
+      if (order["todo_order"] === null) {
+        _this.order.value = [""];
+      } else {
+        _this.order.value = order["todo_order"].split(",");
+      }
     }).then(function () {
       return Object(__WEBPACK_IMPORTED_MODULE_0__api__["d" /* getTodosList */])();
     }).then(function (todos) {
-      _this.todos.value = todos.map(function (todo) {
-        return _extends({}, todo, { is_done: Object(__WEBPACK_IMPORTED_MODULE_1__utils_intToBool__["a" /* intToBool */])(todo.is_done) });
-      });
+      if (!todos.length) {
+        _this.todos.value = [];
+        return;
+      }
+
+      var aliases = todos.reduce(function (acc, cur, i) {
+        return _extends({}, acc, _defineProperty({}, cur.id, i));
+      }, {});
+
       _this.todos.value = _this.order.value.map(function (id) {
-        var _iteratorNormalCompletion = true;
-        var _didIteratorError = false;
-        var _iteratorError = undefined;
-
-        try {
-          for (var _iterator = _this.todos.value[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-            var todo = _step.value;
-
-            if ("" + todo.id === "" + id) return todo;
-          }
-        } catch (err) {
-          _didIteratorError = true;
-          _iteratorError = err;
-        } finally {
-          try {
-            if (!_iteratorNormalCompletion && _iterator.return) {
-              _iterator.return();
-            }
-          } finally {
-            if (_didIteratorError) {
-              throw _iteratorError;
-            }
-          }
-        }
-
-        return null;
-      }).filter(function (todo) {
-        return todo !== null;
+        return todos[aliases[id]];
+      }).map(function (todo) {
+        return _extends({}, todo, { is_done: Object(__WEBPACK_IMPORTED_MODULE_1__utils_intToBool__["a" /* intToBool */])(todo.is_done) });
       });
     });
   }
