@@ -85,16 +85,13 @@ export default {
           return;
         }
 
-        this.todos.value = todos
-          .map((todo) => ({ ...todo, is_done: intToBool(todo.is_done) }));
+        const aliases = todos.reduce((acc, cur, i) => (
+          { ...acc, [cur.id]: i }
+        ), {})
+
         this.todos.value = this.order.value
-          .map((id) => {
-            for (let todo of this.todos.value) {
-              if (`${todo.id}` === `${id}`) return todo;
-            }
-            return null;
-          })
-          .filter((todo) => todo !== null);
+          .map((id) => todos[aliases[id]])
+          .map((todo) => ({ ...todo, is_done: intToBool(todo.is_done) }));
       });
   }
 };
